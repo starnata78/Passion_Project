@@ -103,7 +103,7 @@ namespace Passion_Project.Controllers
             db.Insurers.Remove(insurer);
             db.SaveChanges();
 
-            return Ok(insurer);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)
