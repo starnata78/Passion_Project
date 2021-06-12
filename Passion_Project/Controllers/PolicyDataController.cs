@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -12,47 +12,47 @@ using Passion_Project.Models;
 
 namespace Passion_Project.Controllers
 {
-    public class OwnerDataController : ApiController
+    public class PolicyDataController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext(); 
+        private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/OwnerData/ListOwners
+        // GET: api/PolicyData/ListPolicies
         [HttpGet]
-        public IQueryable<Owner> ListOwners()
+        public IQueryable<Policy> ListPolicies()
         {
-            return db.Owners;
+            return db.Policies;
         }
 
-        // GET: api/OwnerData/FindOwner/5
-        [ResponseType(typeof(Owner))]
+        // GET: api/PolicyData/FindPolicy/5
+        [ResponseType(typeof(Policy))]
         [HttpGet]
-        public IHttpActionResult FindOwner(int id)
+        public IHttpActionResult FindPolicy(int id)
         {
-            Owner owner = db.Owners.Find(id);
-            if (owner == null)
+            Policy policy = db.Policies.Find(id);
+            if (policy == null)
             {
                 return NotFound();
             }
 
-            return Ok(owner);
+            return Ok(policy);
         }
 
-        // POST: api/OwnerData/UpdateOwner/5
+        // POST: api/PolicyData/UpdatePolicy/5
         [ResponseType(typeof(void))]
         [HttpPost]
-        public IHttpActionResult UpdateOwner(int id, Owner owner)
+        public IHttpActionResult UpdatePolicy(int id, Policy policy)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != owner.OwnerID)
+            if (id != policy.PolicyID)
             {
                 return BadRequest();
             }
 
-            db.Entry(owner).State = EntityState.Modified;
+            db.Entry(policy).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace Passion_Project.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OwnerExists(id))
+                if (!PolicyExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace Passion_Project.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/OwnerData/AddOwner
-        [ResponseType(typeof(Owner))]
+        // POST: api/PolicyData/AddAnimal
+        [ResponseType(typeof(Policy))]
         [HttpPost]
-        public IHttpActionResult AddOwner(Owner owner)
+        public IHttpActionResult AddPolicy(Policy policy)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Owners.Add(owner);
+            db.Policies.Add(policy);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = owner.OwnerID }, owner);
+            return CreatedAtRoute("DefaultApi", new { id = policy.PolicyID }, policy);
         }
 
-        // POST: api/OwnerData/DeleteOwner/5
-        [ResponseType(typeof(Owner))]
+        // POST: api/PolicyData/DeletePolicy/5
+        [ResponseType(typeof(Policy))]
         [HttpPost]
-        public IHttpActionResult DeleteOwner(int id)
+        public IHttpActionResult DeletePolicy(int id)
         {
-            Owner owner = db.Owners.Find(id);
-            if (owner == null)
+            Policy policy = db.Policies.Find(id);
+            if (policy == null)
             {
                 return NotFound();
             }
 
-            db.Owners.Remove(owner);
+            db.Policies.Remove(policy);
             db.SaveChanges();
 
-            return Ok();
+            return Ok(policy);
         }
 
         protected override void Dispose(bool disposing)
@@ -115,9 +115,9 @@ namespace Passion_Project.Controllers
             base.Dispose(disposing);
         }
 
-        private bool OwnerExists(int id)
+        private bool PolicyExists(int id)
         {
-            return db.Owners.Count(e => e.OwnerID == id) > 0;
+            return db.Policies.Count(e => e.PolicyID == id) > 0;
         }
     }
 }

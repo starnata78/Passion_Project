@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -12,47 +12,47 @@ using Passion_Project.Models;
 
 namespace Passion_Project.Controllers
 {
-    public class OwnerDataController : ApiController
+    public class InsurerDataController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext(); 
+        private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/OwnerData/ListOwners
+        // GET: api/InsurerData/ListInsurers
         [HttpGet]
-        public IQueryable<Owner> ListOwners()
+        public IQueryable<Insurer> ListInsurers()
         {
-            return db.Owners;
+            return db.Insurers;
         }
 
-        // GET: api/OwnerData/FindOwner/5
-        [ResponseType(typeof(Owner))]
+        // GET: api/InsurerData/FindInsurer/5
+        [ResponseType(typeof(Insurer))]
         [HttpGet]
-        public IHttpActionResult FindOwner(int id)
+        public IHttpActionResult FindInsurer(int id)
         {
-            Owner owner = db.Owners.Find(id);
-            if (owner == null)
+            Insurer insurer = db.Insurers.Find(id);
+            if (insurer == null)
             {
                 return NotFound();
             }
 
-            return Ok(owner);
+            return Ok(insurer);
         }
 
-        // POST: api/OwnerData/UpdateOwner/5
+        // POST: api/InsurerData/UpdateInsurer5
         [ResponseType(typeof(void))]
         [HttpPost]
-        public IHttpActionResult UpdateOwner(int id, Owner owner)
+        public IHttpActionResult UpdateInsurer(int id, Insurer insurer)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != owner.OwnerID)
+            if (id != insurer.InsurerID)
             {
                 return BadRequest();
             }
 
-            db.Entry(owner).State = EntityState.Modified;
+            db.Entry(insurer).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace Passion_Project.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OwnerExists(id))
+                if (!InsurerExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace Passion_Project.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/OwnerData/AddOwner
-        [ResponseType(typeof(Owner))]
+        // POST: api/InsurerData/AddInsurer
+        [ResponseType(typeof(Insurer))]
         [HttpPost]
-        public IHttpActionResult AddOwner(Owner owner)
+        public IHttpActionResult AddInsurer(Insurer insurer)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Owners.Add(owner);
+            db.Insurers.Add(insurer);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = owner.OwnerID }, owner);
+            return CreatedAtRoute("DefaultApi", new { id = insurer.InsurerID }, insurer);
         }
 
-        // POST: api/OwnerData/DeleteOwner/5
-        [ResponseType(typeof(Owner))]
+        // POST: api/InsurerData/DeleteInsurer/5
+        [ResponseType(typeof(Insurer))]
         [HttpPost]
-        public IHttpActionResult DeleteOwner(int id)
+        public IHttpActionResult DeleteInsurer(int id)
         {
-            Owner owner = db.Owners.Find(id);
-            if (owner == null)
+            Insurer insurer = db.Insurers.Find(id);
+            if (insurer == null)
             {
                 return NotFound();
             }
 
-            db.Owners.Remove(owner);
+            db.Insurers.Remove(insurer);
             db.SaveChanges();
 
-            return Ok();
+            return Ok(insurer);
         }
 
         protected override void Dispose(bool disposing)
@@ -115,9 +115,9 @@ namespace Passion_Project.Controllers
             base.Dispose(disposing);
         }
 
-        private bool OwnerExists(int id)
+        private bool InsurerExists(int id)
         {
-            return db.Owners.Count(e => e.OwnerID == id) > 0;
+            return db.Insurers.Count(e => e.InsurerID == id) > 0;
         }
     }
 }
