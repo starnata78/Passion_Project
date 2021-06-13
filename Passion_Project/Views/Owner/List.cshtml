@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Passion_Project.Models.Owner>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+@foreach (var owner in Model)
+{
+    <h2><a href="/Owner/Details/@owner.OwnerID">@owner.First_Name @owner.Last_Name</a></h2>
+    <div>Email: @owner.Email</div>
+    <div>Id: @owner.OwnerID</div>
+
+}
+
