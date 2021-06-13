@@ -1,6 +1,7 @@
 ﻿{
-  "OwnerID":8,
-  "First_Name":"Victor",
-  "Last_Name":"Ivanov",
-  "Email":"victor@yahoo.com"
+  "OwnerID":1,
+  "PolicyID":1,
+  "InsurerID":1,
+  "Active": "true",
+  "PurchaseDate":2021
 }

@@ -31,11 +31,16 @@ namespace Passion_Project.Models
         public DateTime PurchaseDate { get; set; }
 
 
-
-      
-
-
-
-
     }
+    public class ContractDto
+    {
+        public int OwnerID { get; set; }
+        public string First_Name { get; set; }
+        public string Last_Name { get; set; }
+        public string Policy { get; set; }
+        public string Insurer { get; set; }
+        public bool Active { get; set; }
+        public DateTime PurchaseDate { get; set; }
+    }
+
 }
