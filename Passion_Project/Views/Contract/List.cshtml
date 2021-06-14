@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Passion_Project.Models.Contract>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of Contracts</h2>
+ 
+@foreach (var contract in Model)
+{
+    <h2><a href="/Conract/Details/@contract.Owner.OwnerID">@contract.Owner.First_Name @contract.Owner.Last_Name</a></h2>
+    <div>Policy: @contract.Policy.Name</div>
+    <div>Insurer: @contract.Insurer.Name</div>
+    <div>Status: @contract.Active</div>
+    <div>PurchseDate: @contract.PurchaseDate</div>
+
+}

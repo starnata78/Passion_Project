@@ -181,6 +181,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\ContractDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsurerController.cs" />
@@ -301,6 +302,7 @@
     <Content Include="Views\Insurer\Details.cshtml" />
     <Content Include="Views\Insurer\Error.cshtml" />
     <Content Include="Views\Insurer\New.cshtml" />
+    <Content Include="Views\Contract\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
