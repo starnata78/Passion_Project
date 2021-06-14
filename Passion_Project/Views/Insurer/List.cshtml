@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Passion_Project.Models.Insurer>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+@foreach (var insurer in Model)
+{
+    <h2><a href="/Insurer/Details/@insurer.InsurerID">@insurer.Name</a></h2>
+    <div>Name: @insurer.Name</div>
+    <div>Id: @insurer.InsurerID</div>
+
+}
+

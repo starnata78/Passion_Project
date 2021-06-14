@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ContractDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InsurerController.cs" />
     <Compile Include="Controllers\InsurerDataController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OwnerController.cs" />
@@ -296,6 +297,10 @@
     <Content Include="Views\Policy\Error.cshtml" />
     <Content Include="Views\Owner\New.cshtml" />
     <Content Include="Views\Policy\New.cshtml" />
+    <Content Include="Views\Insurer\List.cshtml" />
+    <Content Include="Views\Insurer\Details.cshtml" />
+    <Content Include="Views\Insurer\Error.cshtml" />
+    <Content Include="Views\Insurer\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
