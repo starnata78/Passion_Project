@@ -1,0 +1,15 @@
+﻿
+@model IEnumerable<Passion_Project.Models.Policy>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+
+@foreach (var policy in Model)
+{
+    <h2><a href="/Policy/Details/@policy.PolicyID">@policy.Name</a></h2>
+    <div>Name: @policy.Name</div>
+    <div>Id: @policy.PolicyID</div>
+
+}
