@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -34,7 +34,7 @@ namespace Passion_Project.Controllers
             Debug.WriteLine("The resonse code is");
             Debug.WriteLine(response.StatusCode);
 
-            IEnumerable<Contract> contracts = response.Content.ReadAsAsync<IEnumerable<Contract>>().Result;
+            IEnumerable<ContractDto> contracts = response.Content.ReadAsAsync<IEnumerable<ContractDto>>().Result;
             Debug.WriteLine("Number of contracts received:");
             Debug.WriteLine(contracts.Count());
 
@@ -42,31 +42,63 @@ namespace Passion_Project.Controllers
             return View(contracts);
         }
 
+
         // GET: Contract/Details/5
         public ActionResult Details(int id)
+        { //communicate with contract data api to retrieve an contract
+            //curl https://localhost:44345/api/contractdata/findcontract/id
+
+            string url = "findcontract/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            //Debug.WriteLine("The resonse code is");
+            //Debug.WriteLine(response.StatusCode);
+
+            ContractDto selectedcontract = response.Content.ReadAsAsync<ContractDto>().Result;
+            //Debug.WriteLine("Contract received:");
+            //Debug.WriteLine(seclectedcontract.id);
+
+            return View(selectedcontract);
+
+        }
+        public ActionResult Error()
         {
             return View();
         }
 
-        // GET: Contract/Create
-        public ActionResult Create()
+        // GET: Contract/New
+        //This method asks the user for information about a contract
+        public ActionResult New()
         {
             return View();
         }
 
+
+        //This methods is responsible for creating a contract on itself
         // POST: Contract/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Contract contract)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            Debug.WriteLine("jsonpayload is: ");
+            Debug.WriteLine(contract.ID);
+            //Objective:add new contract into the system using API
+            //curl -d contract.json -H "Content-type:application/json "https://localhost:44345/api/contractdata/addcontract"
+            string url = "addcontract";
 
-                return RedirectToAction("Index");
-            }
-            catch
+            string jsonpayload = jss.Serialize(contract);
+
+            Debug.WriteLine(jsonpayload);
+
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Errors");
             }
         }
 

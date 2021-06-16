@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Passion_Project.Models.Contract>
+﻿@model IEnumerable<Passion_Project.Models.ContractDto>
 @{
     ViewBag.Title = "List";
 }
@@ -7,9 +7,10 @@
  
 @foreach (var contract in Model)
 {
-    <h2><a href="/Conract/Details/@contract.Owner.OwnerID">@contract.Owner.First_Name @contract.Owner.Last_Name</a></h2>
-    <div>Policy: @contract.Policy.Name</div>
-    <div>Insurer: @contract.Insurer.Name</div>
+    <h2><a href="/Contract/Details/@contract.ID">@contract.First_Name @contract.Last_Name</a></h2>
+    <div>Owner ID: @contract.OwnerID</div>
+    <div>Policy: @contract.Policy</div>
+    <div>Insurer: @contract.Insurer</div>
     <div>Status: @contract.Active</div>
     <div>PurchseDate: @contract.PurchaseDate</div>
 

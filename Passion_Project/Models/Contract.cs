@@ -34,6 +34,7 @@ namespace Passion_Project.Models
     }
     public class ContractDto
     {
+        public int ID { get; set; }
         public int OwnerID { get; set; }
         public string First_Name { get; set; }
         public string Last_Name { get; set; }

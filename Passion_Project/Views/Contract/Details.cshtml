@@ -1,0 +1,15 @@
+﻿@model Passion_Project.Models.ContractDto
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<a href="/Contract/list">Go back to list</a>
+<h2>Details</h2>
+<div>ContractID: @Model.ID</div>
+<div>OwnerID: @Model.OwnerID</div>
+<div>Policy: @Model.Policy</div>
+<div>Insurer: @Model.Insurer</div>
+<div>Active Status: @Model.Active</div>
+<div>Purchase Date: @Model.PurchaseDate</div>
+

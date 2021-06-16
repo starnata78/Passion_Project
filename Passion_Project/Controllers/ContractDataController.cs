@@ -25,6 +25,7 @@ namespace Passion_Project.Controllers
 
             Contracts.ForEach(a => ContractDtos.Add(new ContractDto()
             {
+                ID = a.ID,
                 OwnerID = a.OwnerID,
                 First_Name = a.Owner.First_Name,
                 Last_Name = a.Owner.Last_Name,
@@ -46,6 +47,7 @@ namespace Passion_Project.Controllers
             Contract Contract = db.Contracts.Find(id);
             ContractDto ContractDto = new ContractDto()
             {
+                ID = Contract.ID,
                 OwnerID = Contract.OwnerID,
                 First_Name = Contract.Owner.First_Name,
                 Last_Name = Contract.Owner.Last_Name,

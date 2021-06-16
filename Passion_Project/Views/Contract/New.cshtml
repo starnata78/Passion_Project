@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Contract</h2>
+
+<form action="/Contract/Create" method="POST">
+    <div>
+        <lable>OwnerID:</lable><input type="number" name="owner"/>
+    </div>
+    <div>
+        <lable>PolicyId:</lable><input type="number" name="policy"/>
+    </div>
+    <div>
+        <lable>InsurerID:</lable><input type="number" name="insurer"/>
+    </div>
+    <div>
+        <lable>Active Status:</lable><input type="text" name="status"/>
+    </div>
+    <div>
+        <lable>Purchase Date:</lable><input type="datetime" name="date"/>
+    </div>
+    <div>
+        <input type="submit" value="Add Contract"/>
+    </div>
+</form>
