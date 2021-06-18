@@ -103,25 +103,41 @@ namespace Passion_Project.Controllers
 
         }
 
-        // GET: Owner/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Owner/Update/5
+        public ActionResult Update(int id)
         {
-            return View();
+            //find the owner to show the user so they know what to update
+
+            string url = "findowner/"+id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            Owner selectedowner = response.Content.ReadAsAsync<Owner>().Result;
+            
+            return View(selectedowner);
         }
 
         // POST: Owner/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Owner owner)
         {
-            try
-            {
-                // TODO: Add update logic here
+            Debug.WriteLine("jsonpayload is: ");
+            Debug.WriteLine(owner.First_Name);
+            //Objective:edit an existing owner in the system using API
+            //curl -d owner.json -H "Content-type:application/json "https://localhost:44345/api/ownerdata/addowner/5"
+            string url = "updateowner/"+id;
+            string jsonpayload = jss.Serialize(owner);
 
-                return RedirectToAction("Index");
-            }
-            catch
+            Debug.WriteLine(jsonpayload);
+
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Errors");
             }
         }
 

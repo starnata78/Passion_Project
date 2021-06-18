@@ -1,0 +1,29 @@
+﻿@model Passion_Project.Models.ContractDto
+@{
+    ViewBag.Title = "Update Contract";
+}
+
+<h2>Update Contract</h2>
+
+<a href="/Contract/List">Go back to list</a>
+
+<form action="/Contract/Edit/@Model.ID" method="POST">
+    <div>
+        <lable>OwnerID:</lable><input type="number" name="OwnerID" value="@Model.OwnerID" />
+    </div>
+    <div>
+        <lable>PolicyId:</lable><input type="number" name="PolicyID" value="@Model.PolicyId" />
+    </div>
+    <div>
+        <lable>InsurerID:</lable><input type="number" name="InsurerID" value="@Model.InsurerId" />
+    </div>
+    <div>
+        <lable>Active Status:</lable><input type="text" name="Active"/>
+    </div>
+    <div>
+        <lable>Purchase Date:</lable><input type="text" autocomplete="off" name="PurchaseDate" value="@Model.PurchaseDate.ToString("yyyy-MM-dd")" />
+    </div>
+    <div>
+        <input type="submit" value="Update Contract" />
+    </div>
+</form>

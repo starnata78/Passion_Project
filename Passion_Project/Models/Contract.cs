@@ -39,7 +39,9 @@ namespace Passion_Project.Models
         public string First_Name { get; set; }
         public string Last_Name { get; set; }
         public string Policy { get; set; }
+        public int PolicyId { get; set; }
         public string Insurer { get; set; }
+        public int InsurerId { get; set; }
         public bool Active { get; set; }
         public DateTime PurchaseDate { get; set; }
     }

@@ -52,7 +52,9 @@ namespace Passion_Project.Controllers
                 First_Name = Contract.Owner.First_Name,
                 Last_Name = Contract.Owner.Last_Name,
                 Policy = Contract.Policy.Name,
+                PolicyId = Contract.PolicyID,
                 Insurer = Contract.Insurer.Name,
+                InsurerId = Contract.InsurerID,
                 Active = Contract.Active,
                 PurchaseDate = Contract.PurchaseDate
 

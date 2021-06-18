@@ -102,48 +102,64 @@ namespace Passion_Project.Controllers
             }
         }
 
-        // GET: Contract/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Contract/Update/5
+        public ActionResult Update(int id)
         {
-            return View();
+            //find the contract to show to the user so they know what to edit
+            string url = "findcontract/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            ContractDto selectedcontract = response.Content.ReadAsAsync<ContractDto>().Result;
+
+            return View(selectedcontract);
         }
 
         // POST: Contract/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Contract contract)
         {
-            try
-            {
-                // TODO: Add update logic here
+            Debug.WriteLine("jsonpayload is: ");
+            Debug.WriteLine(contract.ID);
+        //Objective:update an existing contract in the system using API
+        //curl -d contract.json -H "Content-type:application/json "https://localhost:44345/api/contractdata/updatecontract/5"
+        //POST: api / ContractData / UpdateContract / 5
+            string url = "updatecontract/"+id;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            string jsonpayload = jss.Serialize(contract);
+
+            Debug.WriteLine(jsonpayload);
+
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Errors");
             }
         }
 
-        // GET: Contract/Delete/5
+        /*// GET: Contract/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
+        */
 
         // POST: Contract/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            //curl/api/animaldata/deletecontract -d ""
+            string url = "deletecontract/" + id;
+            string payload = "";
+            HttpContent content = new StringContent(payload);
+            content.Headers.ContentType.MediaType = "application/json";
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+
+            return RedirectToAction("List");
         }
     }
 }

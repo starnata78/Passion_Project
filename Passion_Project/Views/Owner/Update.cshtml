@@ -1,0 +1,22 @@
+﻿@model Passion_Project.Models.Owner
+@{
+    ViewBag.Title = "Update Owner";
+}
+
+<a href="/Owner/List">Go back to list</a>
+<h2>Update Owner</h2>
+<form action="/Owner/Edit/@Model.OwnerID" method="POST">
+    <div>
+        <label>First Name:</label> <input type="text" name="First_Name" value="@Model.First_Name" />
+    </div>
+    <div>
+        <label>Last Name:</label> <input type="text" name="Last_Name" value="@Model.Last_Name"/>
+    </div>
+    <div>
+        <label>Email:</label> <input type="text" name="Email" value="@Model.Email" />
+    </div>
+    <div>
+        <input type="submit" value="Update Owner" />
+    </div>
+
+</form>

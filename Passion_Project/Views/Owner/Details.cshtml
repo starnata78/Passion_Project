@@ -4,6 +4,14 @@
 }
 
 <a href="/Owner/list">Go back to list</a>
+
+<form action="/Owner/Delete/@Model.OwnerID" method="POST" onsubmit="if (!confirm('Are you sure you want to delete the owener')) return false;"> 
+    <div>
+        <button style="background:#ff0000; color:#ffffff;">Delete this Owner</button>
+    </div>
+
+</form>
+
 <h2>Owner Details</h2>
 <h4>@Model.First_Name @Model.Last_Name</h4>
 <div>Email: @Model.Email</div>
