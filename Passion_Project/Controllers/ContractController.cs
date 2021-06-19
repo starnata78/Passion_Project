@@ -137,7 +137,7 @@ namespace Passion_Project.Controllers
             }
             else
             {
-                return RedirectToAction("Errors");
+                return RedirectToAction("Error");
             }
         }
 

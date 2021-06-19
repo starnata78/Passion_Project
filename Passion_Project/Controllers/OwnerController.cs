@@ -140,27 +140,27 @@ namespace Passion_Project.Controllers
                 return RedirectToAction("Errors");
             }
         }
-
+        /*
         // GET: Owner/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
+        */
 
         // POST: Owner/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            //curl /api/ownerdata/deleteowner -d""
+            string url = "deleteowner/" + id;
+            string payload = "";
+            HttpContent content = new StringContent(payload);
+            content.Headers.ContentType.MediaType = "application/json";
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            return RedirectToAction("List");
         }
     }
 }

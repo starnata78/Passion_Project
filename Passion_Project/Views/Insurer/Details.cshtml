@@ -9,4 +9,11 @@
 <h3>Name:@Model.Name</h3>
 <h4>Id: @Model.InsurerID</h4>
 
+<form action="/Insurer/Delete/@Model.InsurerID" method="POST" onsubmit="if (!confirm('Are you sure you want to delete the insurer')) return false;">
+    <div>
+        <button style="background:#ff0000; color:#ffffff;">Delete this Insurer</button>
+    </div>
+
+</form>
+
 

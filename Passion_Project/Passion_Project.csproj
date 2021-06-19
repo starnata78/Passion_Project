@@ -307,6 +307,8 @@
     <Content Include="Views\Contract\New.cshtml" />
     <Content Include="Views\Contract\Update.cshtml" />
     <Content Include="Views\Owner\Update.cshtml" />
+    <Content Include="Views\Policy\Update.cshtml" />
+    <Content Include="Views\Insurer\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

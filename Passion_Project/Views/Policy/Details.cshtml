@@ -8,3 +8,10 @@
 <h4>Name:@Model.Name</h4>
 <div>Id: @Model.PolicyID</div>
 
+<form action="/Policy/Delete/@Model.PolicyID" method="POST" onsubmit="if (!confirm('Are you sure you want to delete the policy')) return false;">
+    <div>
+        <button style="background:#ff0000; color:#ffffff;">Delete this Policy</button>
+    </div>
+
+</form>
+

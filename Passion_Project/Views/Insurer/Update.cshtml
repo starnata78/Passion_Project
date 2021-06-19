@@ -1,0 +1,22 @@
+﻿@model Passion_Project.Models.Insurer
+@{
+    ViewBag.Title = "Update";
+}
+
+<a href="/Insurer/List">Go back to list</a>
+
+
+<h2>Update Insurer</h2>
+
+<form action="/Insurer/Edit/@Model.InsurerID" method="POST">
+    <div>
+        <label>Insurer ID:</label> <input type="number" name="InsurerID" value="@Model.InsurerID" />
+    </div>
+    <div>
+        <label>Name:</label> <input type="text" name="Name" value="@Model.Name" />
+    </div>
+    <div>
+        <input type="submit" value="Update Insurer" />
+    </div>
+
+</form>

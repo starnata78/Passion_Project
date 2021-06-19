@@ -100,48 +100,64 @@ namespace Passion_Project.Controllers
             }
         }
 
-        // GET: Insurer/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Insurer/Update/5
+        public ActionResult Update(int id)
         {
-            return View();
+            //find the policy to show the user so they know what to update
+
+            string url = "findinsurer/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            Insurer selectedinsurer = response.Content.ReadAsAsync<Insurer>().Result;
+
+            return View(selectedinsurer);
         }
 
         // POST: Insurer/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Insurer insurer)
         {
-            try
-            {
-                // TODO: Add update logic here
+            Debug.WriteLine("jsonpayload is: ");
+            Debug.WriteLine(insurer.Name);
+            //Objective:edit an existing insurer in the system using API
+            //curl -d owner.json -H "Content-type:application/json "https://localhost:44345/api/insurerdata/addinsurer/5"
+            string url = "updateinsurer/" + id;
+            string jsonpayload = jss.Serialize(insurer);
 
-                return RedirectToAction("Index");
-            }
-            catch
+            Debug.WriteLine(jsonpayload);
+
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Errors");
             }
         }
-
+        /*
         // GET: Insurer/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
+        */
 
         // POST: Insurer/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Insurer insurer)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            //curl /api/insurerdata/deleteinsurer -d""
+            string url = "deleteinsurer/" + id;
+            string payload = "";
+            HttpContent content = new StringContent(payload);
+            content.Headers.ContentType.MediaType = "application/json";
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            return RedirectToAction("List");
         }
     }
 }

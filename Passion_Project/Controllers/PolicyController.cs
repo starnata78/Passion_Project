@@ -101,48 +101,64 @@ namespace Passion_Project.Controllers
             }
         }
 
-        // GET: Policy/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Policy/Update/5
+        public ActionResult Update(int id)
         {
-            return View();
+            //find the policy to show the user so they know what to update
+
+            string url = "findpolicy/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            Policy selectedpolicy = response.Content.ReadAsAsync<Policy>().Result;
+
+            return View(selectedpolicy);
         }
 
         // POST: Policy/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Policy policy)
         {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
+            Debug.WriteLine("jsonpayload is: ");
+            Debug.WriteLine(policy.Name);
+            //Objective:edit an existing policy in the system using API
+            //curl -d owner.json -H "Content-type:application/json "https://localhost:44345/api/policydata/addpolicy/5"
+            string url = "updatepolicy/" + id;
+            string jsonpayload = jss.Serialize(policy);
+
+            Debug.WriteLine(jsonpayload);
+
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Errors");
             }
         }
-
+        /*
         // GET: Policy/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
-
+        */
         // POST: Policy/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            //curl /api/policydata/deletepolicy -d""
+            string url = "deletepolicy/" + id;
+            string payload = "";
+            HttpContent content = new StringContent(payload);
+            content.Headers.ContentType.MediaType = "application/json";
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            return RedirectToAction("List");
         }
     }
 }
