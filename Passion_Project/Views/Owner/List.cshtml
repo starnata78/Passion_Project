@@ -5,6 +5,8 @@
 
 <h2>List</h2>
 
+<a href="/Owner/New">New Owner</a>
+
 @foreach (var owner in Model)
 {
     <h2><a href="/Owner/Details/@owner.OwnerID">@owner.First_Name @owner.Last_Name</a></h2>

@@ -6,7 +6,9 @@ using System.Web.Mvc;
 using System.Net.Http;
 using System.Diagnostics;
 using Passion_Project.Models;
+using Passion_Project.Models.ViewModels;
 using System.Web.Script.Serialization;
+
 
 namespace Passion_Project.Controllers
 {
@@ -20,7 +22,7 @@ namespace Passion_Project.Controllers
         static ContractController()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44345/api/contractdata/");
+            client.BaseAddress = new Uri("https://localhost:44345/api/");
         }
         // GET: Contract/List
         public ActionResult List()
@@ -28,7 +30,7 @@ namespace Passion_Project.Controllers
             //communicate with contract data api to retrieve a list of contracts
             //curl https://localhost:44345/api/contractdata/listcontracts
 
-            string url = "listcontracts";
+            string url = "contractdata/listcontracts";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             Debug.WriteLine("The resonse code is");
@@ -48,7 +50,7 @@ namespace Passion_Project.Controllers
         { //communicate with contract data api to retrieve an contract
             //curl https://localhost:44345/api/contractdata/findcontract/id
 
-            string url = "findcontract/" + id;
+            string url = "contractdata/findcontract/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             //Debug.WriteLine("The resonse code is");
@@ -70,7 +72,14 @@ namespace Passion_Project.Controllers
         //This method asks the user for information about a contract
         public ActionResult New()
         {
-            return View();
+            //information about all owners in the system
+            //GET api/ownerdata/listowners
+
+            string url = "ownerdata/listowners";
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            IEnumerable<Owner> ownersOptions = response.Content.ReadAsAsync<IEnumerable<Owner>>().Result;
+
+            return View(ownersOptions);
         }
 
 
@@ -83,7 +92,7 @@ namespace Passion_Project.Controllers
             Debug.WriteLine(contract.ID);
             //Objective:add new contract into the system using API
             //curl -d contract.json -H "Content-type:application/json "https://localhost:44345/api/contractdata/addcontract"
-            string url = "addcontract";
+            string url = "contractdata/addcontract";
 
             string jsonpayload = jss.Serialize(contract);
 
@@ -105,12 +114,31 @@ namespace Passion_Project.Controllers
         // GET: Contract/Update/5
         public ActionResult Update(int id)
         {
-            //find the contract to show to the user so they know what to edit
-            string url = "findcontract/" + id;
-            HttpResponseMessage response = client.GetAsync(url).Result;
-            ContractDto selectedcontract = response.Content.ReadAsAsync<ContractDto>().Result;
+            UpdateContract ViewModel = new UpdateContract();
 
-            return View(selectedcontract);
+          /*View model the existing contract information to be included to accommodate
+           * upgate requrest of ownder ID. In order to achieve it we'll create a class to 
+           * represent both of pieces of information: all owners and all contracts to choose from
+           * path: Model folder - Add - New Folder - call it "ViewModels" - inside "ViewModels" - add - Class - call it "UpdateContgract"
+           */
+
+            //find the contract to show to the user so they know what to edit
+            string url = "contractdata/findcontract/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            ContractDto SelectedContract = response.Content.ReadAsAsync<ContractDto>().Result;
+            ViewModel.SelectedContract = SelectedContract;
+
+            // also like to include all owners id to choose from when updating a particular contract
+            // In case owner id was put incorrectly when creating a new contract. So instead of deleting the 
+            //the entire record, we can amend (update ownder id).
+
+            url = "contractdata/listowners/";
+            response = client.GetAsync(url).Result;
+            IEnumerable<Owner> ownerOptions = response.Content.ReadAsAsync<IEnumerable<Owner>>().Result;
+
+            ViewModel.ownersOptions = ownerOptions;
+
+            return View(ViewModel);
         }
 
         // POST: Contract/Edit/5
@@ -122,7 +150,7 @@ namespace Passion_Project.Controllers
         //Objective:update an existing contract in the system using API
         //curl -d contract.json -H "Content-type:application/json "https://localhost:44345/api/contractdata/updatecontract/5"
         //POST: api / ContractData / UpdateContract / 5
-            string url = "updatecontract/"+id;
+            string url = "contractdata/updatecontract/"+id;
 
             string jsonpayload = jss.Serialize(contract);
 
@@ -140,8 +168,8 @@ namespace Passion_Project.Controllers
                 return RedirectToAction("Error");
             }
         }
-
-        /*// GET: Contract/Delete/5
+        /*
+        // GET: Contract/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
@@ -150,13 +178,16 @@ namespace Passion_Project.Controllers
 
         // POST: Contract/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            //curl/api/animaldata/deletecontract -d ""
-            string url = "deletecontract/" + id;
+            //curl/api/contractdata/deletecontract -d ""
+            string url = "contractdata/deletecontract/" + id;
             string payload = "";
+
             HttpContent content = new StringContent(payload);
             content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
 
 
             return RedirectToAction("List");

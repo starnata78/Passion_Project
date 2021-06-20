@@ -5,6 +5,7 @@
 
 
 <a href="/Contract/list">Go back to list</a>
+
 <h2>Details</h2>
 <div>ContractID: @Model.ID</div>
 <div>OwnerID: @Model.OwnerID</div>
@@ -13,3 +14,10 @@
 <div>Active Status: @Model.Active</div>
 <div>Purchase Date: @Model.PurchaseDate</div>
 
+
+<form action="/Contract/Delete/@Model.ID" method="POST" onsubmit="if (!confirm('Are you sure you want to delete the contract?')) return false;">
+    <div>
+        <button style="background:#ff0000; color:#ffffff;">Delete this Contract</button>
+    </div>
+
+</form>

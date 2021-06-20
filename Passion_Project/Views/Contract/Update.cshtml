@@ -1,4 +1,4 @@
-﻿@model Passion_Project.Models.ContractDto
+﻿@model Passion_Project.Models.ViewModels.UpdateContract
 @{
     ViewBag.Title = "Update Contract";
 }
@@ -7,21 +7,27 @@
 
 <a href="/Contract/List">Go back to list</a>
 
-<form action="/Contract/Edit/@Model.ID" method="POST">
+<form action="/Contract/Edit/@Model.SelectedContract.ID" method="POST">
     <div>
-        <lable>OwnerID:</lable><input type="number" name="OwnerID" value="@Model.OwnerID" />
+        <lable>OwnerID:</lable><input type="number" name="OwnerID" value="@Model.SelectedContract.OwnerID" />
+        <select name="OwnerID">
+            @foreach (var owner in Model.ownersOptions)
+            {
+                <option value="@owner.OwnerID">@owner.Last_Name</option>
+            }
+        </select>
     </div>
     <div>
-        <lable>PolicyId:</lable><input type="number" name="PolicyID" value="@Model.PolicyId" />
+        <lable>PolicyId:</lable><input type="number" name="PolicyID" value="@Model.SelectedContract.PolicyId" />
     </div>
     <div>
-        <lable>InsurerID:</lable><input type="number" name="InsurerID" value="@Model.InsurerId" />
+        <lable>InsurerID:</lable><input type="number" name="InsurerID" value="@Model.SelectedContract.InsurerId" />
     </div>
     <div>
         <lable>Active Status:</lable><input type="text" name="Active"/>
     </div>
     <div>
-        <lable>Purchase Date:</lable><input type="text"  name="PurchaseDate" value="@Model.PurchaseDate.ToString("yyyy-MM-dd")" />
+        <lable>Purchase Date:</lable><input type="text"  name="PurchaseDate" value="@Model.SelectedContract.PurchaseDate.ToString("yyyy-MM-dd")" />
     </div>
     <div>
         <input type="submit" value="Update Contract" />

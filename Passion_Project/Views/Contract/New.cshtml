@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Passion_Project.Models.Owner>
 @{
     ViewBag.Title = "Create";
 }
@@ -7,7 +7,14 @@
 
 <form action="/Contract/Create" method="POST">
     <div>
-        <lable>OwnerID:</lable><input type="number" name="OwnerID" />
+        <lable>OwnerID:</lable>
+        <select name="OwnerID">
+            @foreach (var owner in Model)
+            {
+                <option value="@owner.OwnerID">@owner.Last_Name</option>
+            }
+        </select>
+        
     </div>
     <div>
         <lable>PolicyId:</lable><input type="number" name="PolicyID" />
