@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Passion_Project.Models.Owner>
+﻿@model Passion_Project.Models.ViewModels.ContractNew
 @{
     ViewBag.Title = "Create";
 }
@@ -9,18 +9,29 @@
     <div>
         <lable>OwnerID:</lable>
         <select name="OwnerID">
-            @foreach (var owner in Model)
+            @foreach (var owner in Model.AvailableOwners)
             {
-                <option value="@owner.OwnerID">@owner.Last_Name</option>
+                <option value="@owner.OwnerID">@owner.Last_Name @owner.First_Name</option>
             }
         </select>
-        
     </div>
     <div>
         <lable>PolicyId:</lable><input type="number" name="PolicyID" />
+        <select name="PolicyID">
+            @foreach (var policy in Model.AvailablePolicies)
+            {
+                <option value="@policy.PolicyID">@policy.Name</option>
+            }
+        </select>
     </div>
     <div>
         <lable>InsurerID:</lable><input type="number" name="InsurerID" />
+        <select name="InsurerID">
+            @foreach (var insurer in Model.AvailableInsurers)
+            {
+                <option value="@insurer.InsurerID">@insurer.Name</option>
+            }
+        </select>
     </div>
     <div>
         <lable>Active Status:</lable><input type="text" name="Active" />

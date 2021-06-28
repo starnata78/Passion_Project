@@ -72,8 +72,9 @@ namespace Passion_Project.Controllers
         //This method asks the user for information about a contract
         public ActionResult New()
         {
-            //information about all owners in the system
-            //GET api/ownerdata/listowners
+            //information about all owners, policies and insurers in the system to choose from
+
+            ContractNew ViewModel = ContractNew();
 
             string url = "ownerdata/listowners";
             HttpResponseMessage response = client.GetAsync(url).Result;
