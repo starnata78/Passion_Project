@@ -16,7 +16,7 @@
         </select>
     </div>
     <div>
-        <lable>PolicyId:</lable><input type="number" name="PolicyID" />
+        <lable>PolicyId:</lable>
         <select name="PolicyID">
             @foreach (var policy in Model.AvailablePolicies)
             {
@@ -25,7 +25,7 @@
         </select>
     </div>
     <div>
-        <lable>InsurerID:</lable><input type="number" name="InsurerID" />
+        <lable>InsurerID:</lable>
         <select name="InsurerID">
             @foreach (var insurer in Model.AvailableInsurers)
             {
@@ -37,7 +37,7 @@
         <lable>Active Status:</lable><input type="text" name="Active" />
     </div>
     <div>
-        <lable>Purchase Date:</lable><input type="text"name="PurchaseDate"/>
+        <lable>Purchase Date:</lable><input type="text" name="PurchaseDate" />
     </div>
     <div>
         <input type="submit" value="Add Contract" />

@@ -3,15 +3,36 @@
     ViewBag.Title = "List";
 }
 
-<h2>List</h2>
 
-<a href="/Owner/New">New Owner</a>
 
-@foreach (var owner in Model)
-{
-    <h2><a href="/Owner/Details/@owner.OwnerID">@owner.First_Name @owner.Last_Name</a></h2>
-    <div>Email: @owner.Email</div>
-    <div>Id: @owner.OwnerID</div>
+<div class="go-link"><a href="/Owner/New">New Owner</a></div>
+<h2 class="table-title">List</h2>
+<table class="list-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Owner Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @foreach (var owner in Model)
+                {
+                    <div>@owner.OwnerID </div>
 
-}
+                }
+                    </td>
+            <td>
+                @foreach (var owner in Model)
+                {
+                    <div><a href="/Owner/Details/@owner.OwnerID">@owner.First_Name @owner.Last_Name</a></div>
+
+                }
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
 

@@ -140,13 +140,23 @@ namespace Passion_Project.Controllers
                 return RedirectToAction("Errors");
             }
         }
-        /*
+       
         // GET: Owner/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteConfirm(int id)
         {
-            return View();
+            string url = "findowner/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            Debug.WriteLine("The resonse code is");
+            Debug.WriteLine(response.StatusCode);
+
+            Owner selectedowner = response.Content.ReadAsAsync<Owner>().Result;
+            Debug.WriteLine("Owners received:");
+            Debug.WriteLine(selectedowner.First_Name);
+
+            return View(selectedowner);
         }
-        */
+        
 
         // POST: Owner/Delete/5
         [HttpPost]
@@ -154,13 +164,20 @@ namespace Passion_Project.Controllers
         {
             //curl /api/ownerdata/deleteowner -d""
             string url = "deleteowner/" + id;
-            string payload = "";
-            HttpContent content = new StringContent(payload);
+            HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
-
             HttpResponseMessage response = client.PostAsync(url, content).Result;
+            Debug.WriteLine("The response code is");
+            Debug.WriteLine(response.StatusCode);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
 
-            return RedirectToAction("List");
         }
     }
 }

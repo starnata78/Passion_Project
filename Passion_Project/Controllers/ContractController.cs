@@ -72,15 +72,29 @@ namespace Passion_Project.Controllers
         //This method asks the user for information about a contract
         public ActionResult New()
         {
-            //information about all owners, policies and insurers in the system to choose from
+            ContractNew ViewModel = new ContractNew();
 
-            ContractNew ViewModel = ContractNew();
+            //information about all owners, policies and insurers in the system to choose from
 
             string url = "ownerdata/listowners";
             HttpResponseMessage response = client.GetAsync(url).Result;
             IEnumerable<Owner> ownersOptions = response.Content.ReadAsAsync<IEnumerable<Owner>>().Result;
+            ViewModel.AvailableOwners = ownersOptions;
+            //return View(ownersOptions);
 
-            return View(ownersOptions);
+            url = "PolicyData/ListPolicies";
+            response = client.GetAsync(url).Result;
+            IEnumerable<Policy> AvailablePolicies = response.Content.ReadAsAsync<IEnumerable<Policy>>().Result;
+            ViewModel.AvailablePolicies = AvailablePolicies;
+
+            url = "InsurerData/ListInsurers";
+            response = client.GetAsync(url).Result;
+            IEnumerable<Insurer> AvailableInsurers = response.Content.ReadAsAsync<IEnumerable<Insurer>>().Result;
+            ViewModel.AvailableInsurers = AvailableInsurers;
+
+            return View(ViewModel);
+
+
         }
 
 
@@ -169,13 +183,24 @@ namespace Passion_Project.Controllers
                 return RedirectToAction("Error");
             }
         }
-        /*
+        
         // GET: Contract/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteConfirm(int id)
         {
-            return View();
+            string url = "contractdata/findcontract/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            //Debug.WriteLine("The resonse code is");
+            //Debug.WriteLine(response.StatusCode);
+
+            ContractDto selectedcontract = response.Content.ReadAsAsync<ContractDto>().Result;
+            //Debug.WriteLine("Contract received:");
+            //Debug.WriteLine(seclectedcontract.id);
+
+            return View(selectedcontract);
+
         }
-        */
+
 
         // POST: Contract/Delete/5
         [HttpPost]

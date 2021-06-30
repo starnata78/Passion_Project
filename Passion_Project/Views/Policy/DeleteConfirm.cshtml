@@ -1,17 +1,19 @@
 ﻿@model Passion_Project.Models.Policy
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "DeleteConfirm";
 }
 
+
 <a href="/Policy/list">Go back to list</a>
-<h2>Policy Details</h2>
+<h2>Are you sure you want to delete the policy?</h2>
 <h4>Name:@Model.Name</h4>
 <div>Id: @Model.PolicyID</div>
 
-<form action="/Policy/DeleteConfirm/@Model.PolicyID" method="POST">
+<form action="/Policy/Delete/@Model.PolicyID" method="POST">
     <div>
         <button style="background:#ff0000; color:#ffffff;">Delete this Policy</button>
     </div>
 
 </form>
+
 

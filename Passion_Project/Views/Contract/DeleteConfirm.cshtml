@@ -1,12 +1,13 @@
 ﻿@model Passion_Project.Models.ContractDto
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "DeleteConfirm";
 }
 
 
-<a href="/Contract/list">Go back to list</a>
 
-<h2>Details</h2>
+<a href="/Contract/Details/@Model.ID">Go back </a>
+
+<h2>Are you sure you want to delete this contract?</h2>
 <div>ContractID: @Model.ID</div>
 <div>OwnerID: @Model.OwnerID</div>
 <div>Policy: @Model.Policy</div>
@@ -15,9 +16,15 @@
 <div>Purchase Date: @Model.PurchaseDate</div>
 
 
-<form action="/Contract/DeleteConfirm/@Model.ID" method="POST">
+<form action="/Contract/Delete/@Model.ID" method="POST">
     <div>
         <button style="background:#ff0000; color:#ffffff;">Delete this Contract</button>
     </div>
 
 </form>
+
+
+
+
+<h2>DeleteConfirm</h2>
+

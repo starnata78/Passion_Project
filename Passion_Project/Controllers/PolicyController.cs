@@ -139,13 +139,19 @@ namespace Passion_Project.Controllers
                 return RedirectToAction("Errors");
             }
         }
-        /*
+        
         // GET: Policy/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteConfirm(int id)
         {
-            return View();
+  
+
+            string url = "findpolicy/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            Policy selectedpolicy = response.Content.ReadAsAsync<Policy>().Result;
+
+            return View(selectedpolicy);
         }
-        */
+
         // POST: Policy/Delete/5
         [HttpPost]
         public ActionResult Delete(int id)

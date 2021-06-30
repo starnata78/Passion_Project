@@ -22,3 +22,53 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.navbar-inverse {
+    background-color: blue;
+    border-color: none;
+}
+
+.navbar-inverse .navbar-brand > li {
+        color: white;
+    }
+
+.table-bordered td,th{
+    padding: 0 5em;
+}
+
+.table-bordered{
+    padding-top:2em;
+}
+
+.table-title{
+    margin-top:4em;
+    margin-bottom:1em;
+}
+
+.go-link a {
+    float: left;
+    text-decoration: none;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    color: red;
+}
+
+.update-link a {
+    float: right;
+    text-decoration: none;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    color: red;
+}
+.btn{
+    margin-top: 2em;
+}
+
+.list-table th, td{
+    border: 1px solid black;
+}
+
+.list-table div {
+    border-bottom: 1px solid black;
+    text-align:center;
+}
