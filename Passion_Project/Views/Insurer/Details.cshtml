@@ -3,18 +3,28 @@
     ViewBag.Title = "Details";
 }
 
+<div class="go-link"><a href="/Insurer/list">Go back to list</a></div>
 
-<a href="/Insurer/list">Go back to list</a>
-<a href="/Insurer/Update/@Model.InsurerID">Update</a>
-<h2>Insurer Details</h2>
-<h3>Name:@Model.Name</h3>
-<h4>Id: @Model.InsurerID</h4>
+<div class="update-link"><a href="/Insurer/Update/@Model.InsurerID">Update Insurer</a></div>
 
-<form action="/Insurer/Delete/@Model.InsurerID" method="POST" onsubmit="if (!confirm('Are you sure you want to delete the insurer')) return false;">
-    <div>
-        <button style="background:#ff0000; color:#ffffff;">Delete this Insurer</button>
-    </div>
+<h2 class="table-title">Insurer Details</h2>
+<table class="table-bordered ownertable">
+    <thead>
+        <tr>
+            <th>Insurer ID</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><div> @Model.InsurerID</div></td>
+            <td><div> @Model.Name</div></td>
+        </tr>
+    </tbody>
+</table>
+<div>
+    <a href="/Insurer/DeleteConfirm/@Model.InsurerID" class="btn" style="background:#ff0000; color:#ffffff;">Delete this Insurer</a>
+</div>
 
-</form>
 
 

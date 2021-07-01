@@ -3,14 +3,16 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create Insurer</h2>
+<div class="go-link"><a href="/Insurer/List">Go back to list</a></div>
+
+<h2 class="table-title">Create Insurer</h2>
+
 <form action="/Insurer/Create" method="POST">
     <div>
         <label>Name:</label> <input type="text" name="Name" />
     </div>
     <div>
-        <input type="submit" value="Add Insurer" />
+        <button class="btn" style="background:#ff0000; color:#ffffff;" name="Create Owner">Create Insurer</button>
     </div>
-
 </form>
 

@@ -1,11 +1,11 @@
 ﻿@model Passion_Project.Models.Policy
 @{
-    ViewBag.Title = "Update";
+    ViewBag.Title = "Update Policy";
 }
 
-<a href="/Policy/List">Go back to list</a>
 
-<h2>Update Policy</h2>
+<div class="go-link"><a href="/Policy/List">Go back to list</a></div>
+<h2 class="table-title">Update Policy</h2>
 
 <form action="/Policy/Edit/@Model.PolicyID" method="POST">
     <div>
@@ -15,9 +15,8 @@
         <label>Name:</label> <input type="text" name="Name" value="@Model.Name" />
     </div>
     <div>
-        <input type="submit" value="Update Policy" />
+        <button class="btn" style="background:#ff0000; color:#ffffff;" name="Update Owner">Update Policy</button>
     </div>
-
 </form>
 
 

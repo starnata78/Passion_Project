@@ -314,6 +314,7 @@
     <Content Include="Views\Owner\DeleteConfirm.cshtml" />
     <Content Include="Views\Policy\DeleteConfirm.cshtml" />
     <Content Include="Views\Contract\DeleteConfirm.cshtml" />
+    <Content Include="Views\Insurer\DeleteConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

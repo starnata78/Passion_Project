@@ -80,13 +80,13 @@ namespace Passion_Project.Controllers
             HttpResponseMessage response = client.GetAsync(url).Result;
             IEnumerable<Owner> ownersOptions = response.Content.ReadAsAsync<IEnumerable<Owner>>().Result;
             ViewModel.AvailableOwners = ownersOptions;
-            //return View(ownersOptions);
+            
 
             url = "PolicyData/ListPolicies";
             response = client.GetAsync(url).Result;
             IEnumerable<Policy> AvailablePolicies = response.Content.ReadAsAsync<IEnumerable<Policy>>().Result;
             ViewModel.AvailablePolicies = AvailablePolicies;
-
+            
             url = "InsurerData/ListInsurers";
             response = client.GetAsync(url).Result;
             IEnumerable<Insurer> AvailableInsurers = response.Content.ReadAsAsync<IEnumerable<Insurer>>().Result;
@@ -134,7 +134,7 @@ namespace Passion_Project.Controllers
           /*View model the existing contract information to be included to accommodate
            * upgate requrest of ownder ID. In order to achieve it we'll create a class to 
            * represent both of pieces of information: all owners and all contracts to choose from
-           * path: Model folder - Add - New Folder - call it "ViewModels" - inside "ViewModels" - add - Class - call it "UpdateContgract"
+           * path: Model folder - Add - New Folder - call it "ViewModels" - inside "ViewModels" - add - Class - call it "UpdateContract"
            */
 
             //find the contract to show to the user so they know what to edit
@@ -150,8 +150,18 @@ namespace Passion_Project.Controllers
             url = "contractdata/listowners/";
             response = client.GetAsync(url).Result;
             IEnumerable<Owner> ownerOptions = response.Content.ReadAsAsync<IEnumerable<Owner>>().Result;
-
             ViewModel.ownersOptions = ownerOptions;
+
+            url = "PolicyData/ListPolicies/";
+            response = client.GetAsync(url).Result;
+            IEnumerable<Policy> PoliciesOptions = response.Content.ReadAsAsync<IEnumerable<Policy>>().Result;
+            ViewModel.PoliciesOptions = PoliciesOptions;
+
+            url = "InsurerData/ListInsurers/";
+            response = client.GetAsync(url).Result;
+            IEnumerable<Insurer> InsurersOptions = response.Content.ReadAsAsync<IEnumerable<Insurer>>().Result;
+            ViewModel.InsurersOptions = InsurersOptions;
+
 
             return View(ViewModel);
         }

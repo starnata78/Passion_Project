@@ -3,15 +3,29 @@
     ViewBag.Title = "Details";
 }
 
-<a href="/Policy/list">Go back to list</a>
-<h2>Policy Details</h2>
-<h4>Name:@Model.Name</h4>
-<div>Id: @Model.PolicyID</div>
 
-<form action="/Policy/DeleteConfirm/@Model.PolicyID" method="POST">
-    <div>
-        <button style="background:#ff0000; color:#ffffff;">Delete this Policy</button>
-    </div>
+<div class="go-link"><a href="/Policy/list">Go back to list</a></div>
 
-</form>
+<div class="update-link"><a href="/Policy/Update/@Model.PolicyID">Update Policy</a></div>
+
+<h2 class="table-title">Policy Details</h2>
+<table class="table-bordered ownertable">
+    <thead>
+        <tr>
+            <th>Policy ID</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><div> @Model.PolicyID</div></td>
+            <td><div> @Model.Name</div></td>
+        </tr>
+    </tbody>
+</table>
+<div>
+    <a href="/Policy/DeleteConfirm/@Model.PolicyID" class="btn" style="background:#ff0000; color:#ffffff;">Delete this Policy</a>
+</div>
+
+
 

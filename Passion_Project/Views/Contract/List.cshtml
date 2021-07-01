@@ -3,17 +3,33 @@
     ViewBag.Title = "List";
 }
 
-<h2>List of Contracts</h2>
 
-<a href="/Contract/New">New Contract</a>
- 
-@foreach (var contract in Model)
-{
-    <h2><a href="/Contract/Details/@contract.ID">@contract.First_Name @contract.Last_Name</a></h2>
-    <div>Owner ID: @contract.OwnerID</div>
-    <div>Policy: @contract.Policy</div>
-    <div>Insurer: @contract.Insurer</div>
-    <div>Status: @contract.Active</div>
-    <div>PurchseDate: @contract.PurchaseDate</div>
+<div class="go-link"><a href="/Contract/New">New Contract</a></div>
+<h2 class="table-title">List of Contracts</h2>
 
-}
+<table class="list-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Owner Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @foreach (var contract in Model)
+                {
+                    <div>@contract.ID</div>
+                }
+            </td>
+            <td>
+                @foreach (var contract in Model)
+                {
+                    <div><a href="/Contract/Details/@contract.ID">@contract.First_Name @contract.Last_Name</a></div>
+                }
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+

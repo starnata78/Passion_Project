@@ -137,13 +137,17 @@ namespace Passion_Project.Controllers
                 return RedirectToAction("Errors");
             }
         }
-        /*
+        
         // GET: Insurer/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteConfirm(int id)
         {
-            return View();
+            string url = "findinsurer/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            Insurer selectedinsurer = response.Content.ReadAsAsync<Insurer>().Result;
+
+            return View(selectedinsurer);
         }
-        */
+        
 
         // POST: Insurer/Delete/5
         [HttpPost]

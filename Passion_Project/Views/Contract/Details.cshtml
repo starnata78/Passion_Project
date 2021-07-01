@@ -4,20 +4,37 @@
 }
 
 
-<a href="/Contract/list">Go back to list</a>
+<div class="go-link"><a href="/Contract/list">Go back to list</a></div>
 
-<h2>Details</h2>
-<div>ContractID: @Model.ID</div>
-<div>OwnerID: @Model.OwnerID</div>
-<div>Policy: @Model.Policy</div>
-<div>Insurer: @Model.Insurer</div>
-<div>Active Status: @Model.Active</div>
-<div>Purchase Date: @Model.PurchaseDate</div>
+<div class="update-link"><a href="/Contract/Update/@Model.ID">Update Contract</a></div>
+
+<table class="list-table">
+    <thead>
+        <tr>
+            <th>Contract ID</th>
+            <th>Owner ID</th>
+            <th>Policy</th>
+            <th>Insurer</th>
+            <th>Active Status</th>
+            <th>Purchase Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><div>@Model.ID</div></td>
+            <td><div>@Model.OwnerID</div></td>
+            <td><div>@Model.Policy</div></td>
+            <td><div>@Model.Insurer</div></td>
+            <td><div>@Model.Active</div></td>
+            <td><div>@Model.PurchaseDate</div></td>
+        </tr>
+    </tbody>
+</table>
 
 
 <form action="/Contract/DeleteConfirm/@Model.ID" method="POST">
     <div>
-        <button style="background:#ff0000; color:#ffffff;">Delete this Contract</button>
+        <button class ="btn" style="background:#ff0000; color:#ffffff;">Delete this Contract</button>
     </div>
 
 </form>

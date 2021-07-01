@@ -3,15 +3,34 @@
 @{
     ViewBag.Title = "List";
 }
+<div class="go-link"><a href="/Policy/New">New Policy</a></div>
+<h2 class="table-title">List</h2>
 
-<h2>List</h2>
 
-<a href="/Policy/New">New Policy</a>
+<table class="list-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Policy Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @foreach (var policy in Model)
+                {
+                    <div>@policy.PolicyID </div>
 
-@foreach (var policy in Model)
-{
-    <h2><a href="/Policy/Details/@policy.PolicyID">@policy.Name</a></h2>
-    <div>Name: @policy.Name</div>
-    <div>Id: @policy.PolicyID</div>
+                }
+            </td>
+            <td>
+                @foreach (var policy in Model)
+                {
+                    <div><a href="/Policy/Details/@policy.PolicyID">@policy.Name</a></div>
 
-}
+                }
+            </td>
+        </tr>
+    </tbody>
+</table>
+

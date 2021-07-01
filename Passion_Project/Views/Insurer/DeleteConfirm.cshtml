@@ -1,32 +1,28 @@
-﻿@model Passion_Project.Models.Policy
+﻿@model Passion_Project.Models.Insurer
 @{
     ViewBag.Title = "DeleteConfirm";
 }
 
 
-
-<div class="go-link"><a href="/Policy/Details/@Model.PolicyID">Go back </a></div>
-<h2 class="table-title">Are you sure you want to delete the policy?</h2>
+<div class="go-link"><a href="/Insurer/Details/@Model.InsurerID">Go back </a></div>
+<h2 class="table-title">Are you sure you want to delete this insurer?</h2>
 
 <table class="table-bordered ownertable">
     <thead>
         <tr>
-            <th>Policy ID</th>
+            <th>Insurer ID</th>
             <th>Name</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><div>@Model.PolicyID</div></td>
+            <td><div>@Model.InsurerID</div></td>
             <td><div>@Model.Name</div></td>
         </tr>
     </tbody>
 </table>
-<form action="/Policy/Delete/@Model.PolicyID" method="POST">
+<form action="/Insurer/Delete/@Model.InsurerID" method="POST">
     <div>
         <input type="submit" class="btn" style="background:#ff0000; color:#ffffff;" value="Confirm Delete" />
     </div>
 </form>
-
-
-

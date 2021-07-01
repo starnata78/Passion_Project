@@ -16,5 +16,8 @@ namespace Passion_Project.Models.ViewModels
 
         public IEnumerable<Owner> ownersOptions { get; set; }
 
+        public IEnumerable<Policy> PoliciesOptions { get; set; }
+        public IEnumerable<Insurer>InsurersOptions{ get; set; }
+
     }
 }
