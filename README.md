@@ -1,6 +1,6 @@
 # Passion_Project
 
-##Project Idea
+Project Idea
 
 I would like to build a database which manages clients(owners), policies, insurers and contracts (policies purchased by clients (owners)) for varsity of insurance policies offered by my organization.
 
