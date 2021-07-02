@@ -20,7 +20,7 @@ namespace Passion_Project.Controllers
         static PolicyController()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44345/api/policydata");
+            client.BaseAddress = new Uri("https://localhost:44345/api/policydata/");
         }
 
         // GET: Policy/List

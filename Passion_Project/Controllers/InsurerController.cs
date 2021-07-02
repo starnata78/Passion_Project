@@ -22,7 +22,7 @@ namespace Passion_Project.Controllers
         static InsurerController()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44345/api/insurerdata");
+            client.BaseAddress = new Uri("https://localhost:44345/api/insurerdata/");
         }
 
         // GET: Insurer/List
@@ -157,7 +157,7 @@ namespace Passion_Project.Controllers
         public ActionResult Delete(int id, Insurer insurer)
         {
             //curl /api/insurerdata/deleteinsurer -d""
-            string url = "insurerdata/deleteinsurer/" + id;
+            string url = "deleteinsurer/" + id;
             string payload = "";
             HttpContent content = new StringContent(payload);
             content.Headers.ContentType.MediaType = "application/json";
