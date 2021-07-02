@@ -13,6 +13,13 @@ namespace Passion_Project.Models
         public string Name { get; set; }
 
         //The same policy type can be offered by many insurers
-        public ICollection<Insurer> Insurers { get; set; }
+        public ICollection<InsurerDto> Insurers { get; set; }
+    }
+
+    public class PolicyDto
+    {
+        public int PolicyID { get; set; }
+        public string Name { get; set; }
     }
 }
+

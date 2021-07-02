@@ -15,6 +15,7 @@ namespace Passion_Project.Controllers
     public class InsurerDataController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        
 
         // GET: api/InsurerData/ListInsurers
         [HttpGet]
@@ -29,6 +30,7 @@ namespace Passion_Project.Controllers
         public IHttpActionResult FindInsurer(int id)
         {
             Insurer insurer = db.Insurers.Find(id);
+
             if (insurer == null)
             {
                 return NotFound();

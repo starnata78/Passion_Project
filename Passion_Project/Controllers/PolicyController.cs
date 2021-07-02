@@ -20,7 +20,7 @@ namespace Passion_Project.Controllers
         static PolicyController()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44345/api/policydata/");
+            client.BaseAddress = new Uri("https://localhost:44345/api/policydata");
         }
 
         // GET: Policy/List
@@ -45,6 +45,7 @@ namespace Passion_Project.Controllers
         // GET: Policy/Details/5
         public ActionResult Details(int id)
         {
+
             //communicate with policy data api to retrieve a policy
             //curl https://localhost:44345/api/policydata/findpolicy/id
 
@@ -54,11 +55,11 @@ namespace Passion_Project.Controllers
             //Debug.WriteLine("The resonse code is");
             //Debug.WriteLine(response.StatusCode);
 
-            Policy selectedpolicy = response.Content.ReadAsAsync<Policy>().Result;
+            Policy SelectedPolicy = response.Content.ReadAsAsync<Policy>().Result;
             //Debug.WriteLine("Policy received:");
             //Debug.WriteLine(selectedpolicy.Name);
 
-            return View(selectedpolicy);
+            return View(SelectedPolicy);
         }
 
         public ActionResult Error()
@@ -143,11 +144,15 @@ namespace Passion_Project.Controllers
         // GET: Policy/Delete/5
         public ActionResult DeleteConfirm(int id)
         {
-  
 
             string url = "findpolicy/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
+            Debug.WriteLine("The resonse code is");
+            Debug.WriteLine(response.StatusCode);
+
             Policy selectedpolicy = response.Content.ReadAsAsync<Policy>().Result;
+            Debug.WriteLine("Contract received:");
+            Debug.WriteLine(selectedpolicy.PolicyID);
 
             return View(selectedpolicy);
         }

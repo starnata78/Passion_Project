@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Passion_Project.Models;
+using System.Diagnostics;
 
 namespace Passion_Project.Controllers
 {
@@ -16,12 +17,15 @@ namespace Passion_Project.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+     
         // GET: api/PolicyData/ListPolicies
         [HttpGet]
+
         public IQueryable<Policy> ListPolicies()
         {
             return db.Policies;
         }
+
 
         // GET: api/PolicyData/FindPolicy/5
         [ResponseType(typeof(Policy))]
@@ -29,6 +33,7 @@ namespace Passion_Project.Controllers
         public IHttpActionResult FindPolicy(int id)
         {
             Policy policy = db.Policies.Find(id);
+
             if (policy == null)
             {
                 return NotFound();
