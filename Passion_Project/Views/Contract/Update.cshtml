@@ -3,33 +3,45 @@
     ViewBag.Title = "Update Contract";
 }
 
-<h2>Update Contract</h2>
 
-<a href="/Contract/List">Go back to list</a>
+<div class="go-link"><a href="/Contract/List">Go back to list</a></div>
+<h2 class="table-title">Update Contract</h2>
 
-<form action="/Contract/Edit/@Model.SelectedContract.ID" method="POST">
-    <div>
-        <lable>OwnerID:</lable><input type="number" name="OwnerID" value="@Model.SelectedContract.OwnerID" />
-        <select name="OwnerID">
-            @foreach (var owner in Model.ownersOptions)
-            {
-                <option value="@owner.OwnerID">@owner.Last_Name</option>
-            }
-        </select>
-    </div>
-    <div>
-        <lable>PolicyId:</lable><input type="number" name="PolicyID" value="@Model.SelectedContract.PolicyId" />
-    </div>
-    <div>
-        <lable>InsurerID:</lable><input type="number" name="InsurerID" value="@Model.SelectedContract.InsurerId" />
-    </div>
-    <div>
-        <lable>Active Status:</lable><input type="text" name="Active"/>
-    </div>
-    <div>
-        <lable>Purchase Date:</lable><input type="text"  name="PurchaseDate" value="@Model.SelectedContract.PurchaseDate.ToString("yyyy-MM-dd")" />
-    </div>
-    <div>
-        <input type="submit" value="Update Contract" />
-    </div>
-</form>
+    <form action="/Contract/Edit/@Model.SelectedContract.ID" method="POST">
+        <div>
+            <lable>OwnerID:</lable>
+            <select name="OwnerID">
+                @foreach (var owner in Model.OwnersOptions)
+                {
+                    <option value="@owner.OwnerID">@owner.First_Name @owner.Last_Name</option>
+                }
+            </select>
+        </div>
+        <div>
+            <lable>PolicyId:</lable>
+            <select name="PolicyID">
+                @foreach (var policy in Model.PoliciesOptions)
+                {
+                    <option value="@policy.PolicyID">@policy.Name</option>
+                }
+            </select>
+        </div>
+        <div>
+            <lable>InsurerID:</lable>
+            <select name="InsurerID">
+                @foreach (var insurer in Model.InsurersOptions)
+                {
+                    <option value="@insurer.InsurerID">@insurer.Name</option>
+                }
+            </select>
+        </div>
+        <div>
+            <lable>Active Status:</lable><input type="text" name="Active" />
+        </div>
+        <div>
+            <lable>Purchase Date:</lable><input type="text" name="PurchaseDate" value="@Model.SelectedContract.PurchaseDate.ToString("yyyy-MM-dd")" />
+        </div>
+        <div>
+            <button class="btn" style="background:#ff0000; color:#ffffff;" name="Update Insurer">Update Contract</button>
+        </div>
+    </form>

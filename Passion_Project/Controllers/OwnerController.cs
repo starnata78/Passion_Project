@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Net.Http;
 using System.Diagnostics;
 using Passion_Project.Models;
+using Passion_Project.Models.ViewModels;
 using System.Web.Script.Serialization;
 
 namespace Passion_Project.Controllers
@@ -20,7 +21,7 @@ namespace Passion_Project.Controllers
         static OwnerController()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44345/api/ownerdata/");
+            client.BaseAddress = new Uri("https://localhost:44345/api/");
         }
 
         // GET: Owner/List
@@ -29,7 +30,7 @@ namespace Passion_Project.Controllers
             //communicate with owner data api to retrieve a list of owners
             //curl https://localhost:44345/api/ownerdata/listowners
 
-            string url = "listowners";
+            string url = "ownerdata/listowners";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             //Debug.WriteLine("The resonse code is");
@@ -49,17 +50,29 @@ namespace Passion_Project.Controllers
             //communicate with owner data api to retrieve an owner
             //curl https://localhost:44345/api/ownerdata/findowner/id
 
-            string url = "findowner/"+id;
+            DetailsOwner ViewModel = new DetailsOwner();
+
+            string url = "ownerdata/findowner/"+id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             //Debug.WriteLine("The resonse code is");
             //Debug.WriteLine(response.StatusCode);
 
-            Owner selectedowner = response.Content.ReadAsAsync<Owner>().Result;
+            Owner SelectedOwner = response.Content.ReadAsAsync<Owner>().Result;
             //Debug.WriteLine("Owners received:");
             //Debug.WriteLine(selectedowner.First_Name);
 
-            return View(selectedowner);
+            ViewModel.SelectedOwner = SelectedOwner;
+            //showcase all contracts(purchased policies) related to a particular owner
+            //send a request to gather information about contracts related to a particular owner ID
+
+            url = "contractdata/listcontractsforowner/" +id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<ContractDto> RelatedContracts = response.Content.ReadAsAsync<IEnumerable<ContractDto>>().Result;
+            ViewModel.RelatedContracts = RelatedContracts;
+
+
+            return View(ViewModel);
         }
 
         public ActionResult Error()
@@ -83,7 +96,7 @@ namespace Passion_Project.Controllers
             Debug.WriteLine(owner.First_Name);
             //Objective:add new owner into the system using API
             //curl -d owner.json -H "Content-type:application/json "https://localhost:44345/api/ownerdata/addowner"
-            string url = "addowner";
+            string url = "ownerdata/addowner";
 
             string jsonpayload = jss.Serialize(owner);
 
@@ -108,7 +121,7 @@ namespace Passion_Project.Controllers
         {
             //find the owner to show the user so they know what to update
 
-            string url = "findowner/"+id;
+            string url = "ownerdata/findowner/"+id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             Owner selectedowner = response.Content.ReadAsAsync<Owner>().Result;
             
@@ -123,7 +136,7 @@ namespace Passion_Project.Controllers
             Debug.WriteLine(owner.First_Name);
             //Objective:edit an existing owner in the system using API
             //curl -d owner.json -H "Content-type:application/json "https://localhost:44345/api/ownerdata/addowner/5"
-            string url = "updateowner/"+id;
+            string url = "ownerdata/updateowner/"+id;
             string jsonpayload = jss.Serialize(owner);
 
             Debug.WriteLine(jsonpayload);
@@ -144,7 +157,7 @@ namespace Passion_Project.Controllers
         // GET: Owner/Delete/5
         public ActionResult DeleteConfirm(int id)
         {
-            string url = "findowner/" + id;
+            string url = "ownerdata/findowner/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             Debug.WriteLine("The resonse code is");
@@ -163,7 +176,7 @@ namespace Passion_Project.Controllers
         public ActionResult Delete(int id)
         {
             //curl /api/ownerdata/deleteowner -d""
-            string url = "deleteowner/" + id;
+            string url = "ownerdata/deleteowner/" + id;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync(url, content).Result;

@@ -35,6 +35,29 @@ namespace Passion_Project.Controllers
             return ContractDtos;
                
         }
+        //gathers information about the contracts related to a particular owner ID
+        //parameter: OwnerID
+        [HttpGet]
+        public IEnumerable<ContractDto> ListContractsforOwner(int id)
+        {
+            List<Contract> Contracts = db.Contracts.Where(a=>a.OwnerID==id).ToList();
+            List<ContractDto> ContractDtos = new List<ContractDto>();
+
+            Contracts.ForEach(a => ContractDtos.Add(new ContractDto()
+            {
+                ID = a.ID,
+                OwnerID = a.OwnerID,
+                First_Name = a.Owner.First_Name,
+                Last_Name = a.Owner.Last_Name,
+                Policy = a.Policy.Name,
+                Insurer = a.Insurer.Name,
+                Active = a.Active,
+                PurchaseDate = a.PurchaseDate
+            }));
+
+            return ContractDtos;
+
+        }
 
         // GET: api/ContractData/FindContract/5
         [ResponseType(typeof(Contract))]

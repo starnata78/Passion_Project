@@ -78,16 +78,16 @@ namespace Passion_Project.Controllers
 
             string url = "ownerdata/listowners";
             HttpResponseMessage response = client.GetAsync(url).Result;
-            IEnumerable<Owner> ownersOptions = response.Content.ReadAsAsync<IEnumerable<Owner>>().Result;
-            ViewModel.AvailableOwners = ownersOptions;
+            IEnumerable<Owner> OwnersOptions = response.Content.ReadAsAsync<IEnumerable<Owner>>().Result;
+            ViewModel.AvailableOwners = OwnersOptions;
             
 
-            url = "PolicyData/ListPolicies";
+            url = "policydata/listPolicies";
             response = client.GetAsync(url).Result;
             IEnumerable<Policy> AvailablePolicies = response.Content.ReadAsAsync<IEnumerable<Policy>>().Result;
             ViewModel.AvailablePolicies = AvailablePolicies;
             
-            url = "InsurerData/ListInsurers";
+            url = "insurerdata/listinsurers";
             response = client.GetAsync(url).Result;
             IEnumerable<Insurer> AvailableInsurers = response.Content.ReadAsAsync<IEnumerable<Insurer>>().Result;
             ViewModel.AvailableInsurers = AvailableInsurers;
@@ -126,38 +126,29 @@ namespace Passion_Project.Controllers
             }
         }
 
-        // GET: Contract/Update/5
+        // GET: Contract/Edit/5
         public ActionResult Update(int id)
         {
             UpdateContract ViewModel = new UpdateContract();
-
-          /*View model the existing contract information to be included to accommodate
-           * upgate requrest of ownder ID. In order to achieve it we'll create a class to 
-           * represent both of pieces of information: all owners and all contracts to choose from
-           * path: Model folder - Add - New Folder - call it "ViewModels" - inside "ViewModels" - add - Class - call it "UpdateContract"
-           */
-
-            //find the contract to show to the user so they know what to edit
+            //existing contract information
             string url = "contractdata/findcontract/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             ContractDto SelectedContract = response.Content.ReadAsAsync<ContractDto>().Result;
             ViewModel.SelectedContract = SelectedContract;
 
-            // also like to include all owners id to choose from when updating a particular contract
-            // In case owner id was put incorrectly when creating a new contract. So instead of deleting the 
-            //the entire record, we can amend (update ownder id).
+            //also like to include all owners, policies and insurers to choose from when updating this contract
 
-            url = "contractdata/listowners/";
+            url = "ownerdata/listowners/";
             response = client.GetAsync(url).Result;
-            IEnumerable<Owner> ownerOptions = response.Content.ReadAsAsync<IEnumerable<Owner>>().Result;
-            ViewModel.ownersOptions = ownerOptions;
+            IEnumerable<Owner> OwnerOptions = response.Content.ReadAsAsync<IEnumerable<Owner>>().Result;
+            ViewModel.OwnersOptions = OwnerOptions;
 
-            url = "PolicyData/ListPolicies/";
+            url = "policydata/listpolicies/";
             response = client.GetAsync(url).Result;
             IEnumerable<Policy> PoliciesOptions = response.Content.ReadAsAsync<IEnumerable<Policy>>().Result;
             ViewModel.PoliciesOptions = PoliciesOptions;
 
-            url = "InsurerData/ListInsurers/";
+            url = "insurerdata/listinsurers/";
             response = client.GetAsync(url).Result;
             IEnumerable<Insurer> InsurersOptions = response.Content.ReadAsAsync<IEnumerable<Insurer>>().Result;
             ViewModel.InsurersOptions = InsurersOptions;
@@ -166,7 +157,7 @@ namespace Passion_Project.Controllers
             return View(ViewModel);
         }
 
-        // POST: Contract/Edit/5
+        // POST: Contract/Update/5
         [HttpPost]
         public ActionResult Edit(int id, Contract contract)
         {

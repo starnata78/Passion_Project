@@ -1,7 +1,8 @@
 ﻿{
-  "OwnerID":1,
-  "PolicyID":1,
-  "InsurerID":1,
+  "ContractID":22,
+  "OwnerID": 1,
+  "PolicyID": 1,
+  "InsurerID": 1,
   "Active": "true",
-  "PurchaseDate":2021
+  "PurchaseDate": 2021
 }
